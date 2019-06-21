@@ -1,0 +1,36 @@
+version: '2'
+services:
+  db:
+    image: mongo:4.0
+    ports:
+      - "27017:27017"
+    environment:
+      -   MONGO_INITDB_ROOT_USERNAME=appuser
+      -   MONGO_INITDB_ROOT_PASSWORD=secret
+  users:
+    build:
+      context: .
+      dockerfile: ./app/dockerfile
+    container_name: "users"    
+    ports:
+      - 8010:8010
+    volumes:
+      -   ./:/app
+    command: bash -c "python users.py"
+    depends_on:
+      - db
+
+  user_notes:
+    build:
+      context: .
+      dockerfile: ./app/dockerfile
+    container_name: "user_notes"
+    ports:
+      - 8011:8011
+    volumes:
+      -   ./:/app
+    command: bash -c "python user_notes.py"
+
+    depends_on:
+      - db
+  
