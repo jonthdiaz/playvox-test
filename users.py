@@ -61,7 +61,7 @@ def user_create():
     response.content_type = 'application/json'
     return json.dumps(errors)
 
-  if db.users.count({'name': name}) >= 0:  
+  if db.users.count({'name': name}) >= 1:  
     response.content_type = 'application/json'
     return json.dumps('User already exists')
 
