@@ -23,6 +23,11 @@ def enable_cors():
   response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, OPTIONS'
   response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 
+'''
+  Method: Post
+  Description: Create a new user in database
+  Params: name, lastname, age, gender, email, registration_date all fields are required
+'''
 @app.post('/v1/users')
 def user_create():
   data = request.json or {}
@@ -67,7 +72,11 @@ def user_create():
   response.content_type = 'application/json'
   return json.dumps("User created correctly %s" % str(result.inserted_id))
 
-
+'''
+  Method: delete
+  Description: Remove user from db
+  Params: User id 
+'''
 @app.delete('/v1/users')
 def user_delete():
   response.content_type = 'application/json'
@@ -89,6 +98,11 @@ def user_delete():
 
   return json.dumps('User deleted correctly')
 
+'''
+  Method: Put
+  Description: Update user's fields
+  Params: name, lastname, age, gender, email, registration_date
+'''
 @app.put('/v1/users')
 def user_update():
   response.content_type = 'application/json'
@@ -138,6 +152,12 @@ def user_update():
 
   return json.dumps('User update correctly')
 
+
+'''
+  Method: Get
+  Description: Get information about a user with user id in the url
+  params: User id
+'''
 @app.get('/v1/users/:id')
 def single_user(id):
   response.content_type = 'application/json'
@@ -158,6 +178,11 @@ def single_user(id):
   return json.dumps(user)
 
 
+'''
+  Method: Get
+  Description: Get information about a user getting id from data
+  params: User id
+'''
 @app.get('/v1/users')
 def user():
   response.content_type = 'application/json'
@@ -179,6 +204,11 @@ def user():
   return json.dumps(user)
 
 
+'''
+  Method: Get
+  Description: Search information about user by name, lastname, agender and email
+  Params: query, it is a string to search
+'''
 @app.get('/v1/users/search_by')
 def user_search_by():
   response.content_type = 'application/json'

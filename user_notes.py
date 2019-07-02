@@ -25,6 +25,11 @@ def enable_cors():
   response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 
 
+'''
+  Method: Post
+  Description: Create a new note for the user
+  Params: user_id, title, body, created
+'''
 @app.post('/v1/user/:id/notes')
 def user_create_notes(id):
   data = request.json or {}
@@ -65,6 +70,11 @@ def user_create_notes(id):
   response.content_type = 'application/json'
   return json.dumps("Record created correctly %s" % str(result.inserted_id))
 
+'''
+  Method: Get
+  Description: Get notes about user
+  Params: id 
+'''
 @app.get('/v1/user/:id/notes')
 def user_get_notes(id):
   response.content_type = 'application/json'
