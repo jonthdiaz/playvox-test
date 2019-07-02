@@ -22,3 +22,36 @@ docker-compose up -d
 ```
 
 After that you can go the url http://localhost:8000 to see the web ui
+
+
+Api
+======
+
+### Create new user
+
+It makes post to the url http://localhost:8010/v1/users
+
+```javascript
+Params 
+name, lastname, age, gender, email, registration_date all these fields are required
+```
+### Delete user
+
+It makes delete to the url http://localhost:8010/v1/users with "id" as data parameter
+
+### Update user
+
+It makes put to the url http://localhost:8010/v1/users with "id" as data parameter
+
+```
+Params
+id, name, lastname, age, gender, email, registration_date
+```
+
+### Get user
+
+It makes get to the url http://localhost:8010/v1/users/:id where id is the Object id of the user
+
+
+
+
