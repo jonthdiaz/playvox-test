@@ -4,6 +4,14 @@ This repository contains test for playvox
 
 The ui for this test is [here]( http://54.197.246.139:8000)
 
+Stack
+===
+1. [Bottle](https://bottlepy.org/docs/dev/)
+2. [Mongodb](https://www.mongodb.com/)
+3. Python 3.7
+4. [Docker](https://www.docker.com/)
+5. [Docker-compose](https://docs.docker.com/compose/)
+6. [Vuejs](https://vuejs.org/)
 
 Installation
 ======
@@ -51,6 +59,14 @@ id, name, lastname, age, gender, email, registration_date
 ### Get user
 
 It makes get to the url http://localhost:8010/v1/users/:id where id is the Object id of the user
+
+### Create new user's note
+
+It makes post to the url http://localhost:8011/v1/user/:id/notes where id is the Object id of the user
+```
+Params
+id, title, body, created where id is the Object id of the user
+```
 
 
 
