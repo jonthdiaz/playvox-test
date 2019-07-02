@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Playvox Jonathan Díaz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  </head>
+  <body>
+    <h2 class="center">Playvox Jonathan Díaz</h2>
+    <div class="row">
+      <div class="col s12 center-align">
+      <script type="text/x-template" id="template-script">
+        <div class="container">
+          <div class="row">
+            <div class="col s12" style="margin-top:32px;">
+              <div class="col s4">
+                <input placeholder="Search by name, lastname, sex nad email" v-model="search"  v-on:keyup.enter="search_users" />
+              </div>
+              <div class="col s1">
+                <button class="btn" @click="search_users">Search</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-s12">
+              <ul class="collection with-header" v-for="user in users">
+                <li class="collection-header left-align " style="cursor:pointer;font-weight:500;" @click="search_user_notes(user)">{{user.name}}</li>
+                <li class="collection-item left-align" v-for="note in notes[user._id.$oid]" style="font-weight:300">{{note.title}} {{note.body}}</li>
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </script>
+        <div class="" id="app">
+          <template-app> </template-app>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script type="text/javascript" src="./vuejs_app.js"></script>
+  </body>
+</html>

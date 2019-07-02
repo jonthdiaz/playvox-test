@@ -11,7 +11,7 @@ services:
     build:
       context: .
       dockerfile: ./app/dockerfile
-    container_name: "users"    
+    container_name: "users"
     ports:
       - 8010:8010
     volumes:
@@ -33,4 +33,10 @@ services:
 
     depends_on:
       - db
-  
+
+  webui:
+    build: webui
+    ports:
+      - "8000:80"
+    volumes:
+      - "./webui/files/:/files/"

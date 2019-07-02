@@ -2,12 +2,26 @@ from bottle import route, run, template, Bottle, response, request
 import json
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-
+from bson.json_util import dumps
+import pymongo
 
 client = MongoClient('mongodb://appuser:secret@db/playvox_users?authSource=admin', 27017)
 db = client.playvox_users
 
 app = Bottle()
+
+#create index
+db.users.create_index([('name', pymongo.TEXT)])
+
+@app.hook('after_request')
+def enable_cors():
+  """
+  You need to add some headers to each request.
+  Don't use the wildcard '*' for Access-Control-Allow-Origin in production.
+  """
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, POST, DELETE, OPTIONS'
+  response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 
 @app.post('/v1/users')
 def user_create():
@@ -163,5 +177,18 @@ def user():
   user =  db.users.find_one({'_id': ObjectId(user_id)}, { '_id': 0 })
   
   return json.dumps(user)
+
+
+@app.get('/v1/users/search_by')
+def user_search_by():
+  response.content_type = 'application/json'
+  query = request.query.get('query') 
+  users = db.users.find({'$or': [{'name': {'$regex':query}},
+                                 {'lastname': {'$regex':query}},
+                                 {'gender': {'$regex':query}},
+                                 {'email': {'$regex':query}},
+                                ]})
+  return dumps(users)
+
 
 run(app, host='0.0.0.0', port=8010, debug=True, reloader=True)
