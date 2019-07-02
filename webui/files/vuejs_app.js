@@ -10,7 +10,7 @@ Vue.component('template-app', {
 	methods:{
 		search_users(value){
 			var self = this
-			fetch(`http://192.168.99.100:8010/v1/users/search_by?query=${self.search}`)
+			fetch(`http://localhost:8010/v1/users/search_by?query=${self.search}`)
 			.then(response => response.json())
 			.then(data => {
 			  self.users = data
@@ -19,7 +19,7 @@ Vue.component('template-app', {
 		},
     search_user_notes(user){
       var self = this
-			fetch(`http://192.168.99.100:8011/v1/user/${user._id.$oid}/notes`)
+			fetch(`http://localhost:8011/v1/user/${user._id.$oid}/notes`)
 			.then(response => response.json())
 			.then(data => {
         self.notes.push(user._id.$oid)
